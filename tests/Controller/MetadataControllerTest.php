@@ -262,6 +262,27 @@ class MetadataControllerTest extends TestCase {
         $this->assertEquals('Lavf57.76.100', $metadata['Encoding tool']);
     }
 
+    public function testWavGUANO() {
+        $res = $this->controller->get('guano_meta_sample.wav');
+        $data = $res->getData();
+        $this->assertEquals('success', $data['response']);
+        $guano = 'guano';
+
+        $metadata = $data['metadata'];
+        $this->assertEquals('3.0', $metadata[$guano]['Firmware Version']);
+        $this->assertEquals('Wildlife Acoustics, Inc.', $metadata[$guano]['Make']);
+        $this->assertEquals('Song Meter Mini', $metadata[$guano]['Model']);
+        $this->assertEquals('SMA05626', $metadata[$guano]['Serial']);
+        $this->assertEquals('GONDO2', $metadata[$guano]['WA|Song Meter|Prefix']);
+        $this->assertEquals('[{"rate":24000,"gain":18}]', $metadata[$guano]['WA|Song Meter|Audio settings']);
+        $this->assertEquals('9.429', $metadata[$guano]['Length']);
+        $this->assertEquals('GONDO2_20230502_135358.wav', $metadata[$guano]['Original Filename']);
+	$this->assertEquals('2023-05-02 13:53:58+2:00', $metadata[$guano]['Timestamp']);
+        $this->assertEquals('47.12958 8.20145', $metadata[$guano]['Loc Position']);
+        $this->assertEquals('25.00', $metadata[$guano]['Temperature Int']);
+        $this->assertEquals('24000', $metadata[$guano]['Samplerate']);
+    }
+
     public function testPdf() {
         $res = $this->controller->get('sampleunsecuredpdf.pdf');
         $data = $res->getData();
