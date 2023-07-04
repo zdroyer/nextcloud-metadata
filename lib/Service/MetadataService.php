@@ -332,6 +332,12 @@ class MetadataService {
             $this->addVal($this->t('Encoding tool'), $v, $return);
         }
 
+        if ($v = $this->getVal('guano', $riff) && is_array($v)){
+            foreach ($v as $key => $value) {
+                $this->addVal( $key, $value, $return);
+            }
+        }
+
         if ($v = $this->getVal('gps_latitude', $quicktime)) {
             $lat = $v[0];
             $this->addVal($this->t('GPS coordinates'), $this->formatGpsDegree($lat, 'N', 'S'), $return);
